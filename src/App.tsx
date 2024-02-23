@@ -39,10 +39,6 @@ function App() {
     setTodoDescription(description);
   }
 
-  const filters = todoList?.filter(item => filter === '' ? item.id : item.completed === filter)
-  console.log(filters);
-
-
   return (
     <div className="flex flex-grow flex-col items-center justify-center bg-gray-900 h-screen">
       <div className="max-w-full p-4 mb-3 bg-gray-800 rounded-lg shadow-lg w-2/3 text-gray-200">
@@ -62,7 +58,8 @@ function App() {
                 <NoteAdd size="24" color="#FF8A65" />
             }
           </button>
-          <select name="" id="" onChange={(event) => setFilter(event.target.value === 'done' ? true: false)}>
+          <select name="" id="" onChange={(event) => setFilter(event.target.value === 'done' ? true: event.target.value === 'all' ? '' : false)}>
+          <option value="all">All</option>
             <option value="backlog">BackLog</option>
             <option value="done">Done</option>
           </select>
