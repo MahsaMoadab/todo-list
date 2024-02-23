@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { KeyboardEvent, SyntheticEvent, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { AppDispatch, RootState } from "./store";
 import { addTodo, editTodo, removeTodo, setTodoStatus } from "./redux/todoSlice";
@@ -39,6 +39,13 @@ function App() {
     setTodoDescription(description);
   }
 
+  const handleKeyboardEvent = (e: KeyboardEvent) => {
+    if(e?.keyCode  === 13){
+      todoHandler();
+    }
+  };
+
+  
   return (
     <div className="flex flex-grow flex-col items-center justify-center bg-gray-900 h-screen">
       <div className="max-w-full p-4 mb-3 bg-gray-800 rounded-lg shadow-lg w-2/3 text-gray-200">
@@ -48,6 +55,7 @@ function App() {
             className="w-full bg-transparent h-full outline-0	border-none text-lg"
             onChange={(e) => setTodoDescription(e.target.value)}
             value={todoDescription}
+            onKeyDown={handleKeyboardEvent}
           />
           <button
             onClick={todoHandler}
